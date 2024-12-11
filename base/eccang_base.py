@@ -76,7 +76,7 @@ class eccang():
             "timestamp": str(int(round(time.time()*1000))),
             "version": self.version
         }
-        
+
 
     def get_data(self, interface_name, biz_content, data_format='json'):
 
@@ -95,7 +95,7 @@ class eccang():
             biz_content['page'] = page
             self.build_connect(interface_name, biz_content)
 
-            sign_str = mk_str(self.self.params, self.Secret_Key)
+            sign_str = mk_str(self.params, self.Secret_Key)
 
             params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
@@ -130,7 +130,7 @@ class eccang():
                         target_page = ceil(record_num/page_size)
                 result.extend(res)
                 page += 1
-                
+
         if record_num == len(result):
             print("Total: ", len(result), " Success!")
         else:
@@ -139,5 +139,3 @@ class eccang():
             return result
         elif data_format == 'dataframe':
             return (pd.DataFrame(result))
-
-
