@@ -99,36 +99,49 @@ class eccang():
 
             params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
+            try:
+                data = data.json()
+            except:
+                print("Error: ", data.text)
 
-            if data.json().get('code') == "common.error.code.0028":
+            if data.get('code') == "common.error.code.0028":
                 print("加密串: ", sign_str)
                 print("参数列表: ", params1)
                 print("request_body: ", data.request.body)
                 print("Error: ", data.text)
                 break
-            elif data.json().get('code') != "200":
+            elif data.get('code') != "200":
                 print("加密串: ", sign_str)
                 print("参数列表: ", params1)
+                print("respose_data: ", data)
                 print("request_body: ", data.request.body)
                 print("Error: ", data.text)
                 break
             else:
-                print(data.json())
-                try:
-                    print(data.json()['total_count'])
-                except:
-                    print("No total_count")
-                res = json.loads(data.json()['biz_content'])
+                print(data)
+                res = json.loads(data['biz_content'])
+
                 if isinstance(res, list):
                     record_num = len(res)
                     target_page = 1
                 else:
-                    res = (json.loads(data.json()['biz_content'])['data'])
                     if page == 1:
-                        record_num = int(json.loads(data.json()['biz_content'])['total'])
-                        print("Total: ", record_num)
-                        target_page = ceil(record_num/page_size)
-                result.extend(res)
+                        try:
+                            try:
+                                record_num = int(res['total'])
+                            except:
+                                record_num = int(data['total_count'])
+                            target_page = ceil(record_num/page_size)
+                        except:
+                            print("No total/total_count")
+                            record_num = len(res['data'])
+                            target_page = 1
+                        print("Total page: ", target_page)
+                if isinstance(res['data'], dict):
+                    result.append(res['data'])
+                else:
+                    result.extend(res['data'])
+
                 page += 1
 
         if record_num == len(result):
