@@ -29,8 +29,11 @@ def getWarehousesInfo(path='setting.json'):
 def getWarehouseShippingForOrder(path='setting.json'):
     # 获取仓库配送方式
     EC = eccang(path)
-    WarehouseShippingForOrder = EC.get_data(interface_name='getWarehouseShippingForOrder', biz_content={'page':1,'page_size':100}, data_format='json')
-    return (WarehouseShippingForOrder)
+    res = EC.get_data(interface_name='getWarehouseShippingForOrder', biz_content={'page':1,'page_size':100}, data_format='json')
+    for k, v in res[0].items():
+        v['code'] = k
+    import pandas as pd
+    return pd.DataFrame(res[0].values())
 
 
 def getShippingMethod(path='setting.json'):
