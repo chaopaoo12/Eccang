@@ -11,7 +11,6 @@
 from Eccang.base.eccang_base import eccang
 
 
-
 def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
     # listing表现-日维度接口
     EC = eccang(path)
@@ -26,7 +25,7 @@ def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=No
 def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=None, update_datetime=None):
     # 采购单
     EC = eccang(path)
-    if create_date is not None:
+    if create_datetime is not None:
         # 采购单 创建
         PurchaseOrders = EC.get_data(interface_name='getPurchaseOrders',
                                      biz_content={'page':1,'page_size':100,
@@ -34,7 +33,7 @@ def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=No
                                                   'date_for':create_datetime,
                                                   'date_to':end_datetime},
                                      data_format='dataframe')
-    elif update_date is not None:
+    elif update_datetime is not None:
         # 采购单 刷新状态
         PurchaseOrders = EC.get_data(interface_name='getPurchaseOrders',
                                      biz_content={'page':1,'page_size':100,
