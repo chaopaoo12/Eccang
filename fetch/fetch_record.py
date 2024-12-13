@@ -113,12 +113,13 @@ def getRmaReturnList(path='setting.json', end_datetime=None, create_datetime=Non
     return (ReturnList)
 
 
-def getShipBatch(path='setting.json', end_date=None, create_date=None):
+def getShipBatch(path='setting.json', user_id=None, end_date=None, create_date=None):
     # 头程数据
     #todo: userid传入
     EC = eccang(path)
     ShipBatch = EC.get_data(interface_name='getShipBatch',
                             biz_content={'page':1,'page_size':1000,
+                                         'user_id':user_id,
                                          'date_for':create_date,
                                          'date_to':end_date},
                             data_format='dataframe')
