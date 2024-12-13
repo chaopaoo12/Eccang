@@ -2,7 +2,6 @@ import time
 import hashlib
 import json
 import requests
-import sys
 from random import sample
 from string import ascii_letters, digits
 import pandas as pd
