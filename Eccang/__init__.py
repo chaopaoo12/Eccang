@@ -9,8 +9,8 @@
 
 # here put the import lib
 
-from Eccang.base.eccang_base import eccang
-from Eccang.base.utils import SQL_CREATE_STATEMENT_FROM_DATAFRAME
-from Eccang.fetch.base_fetch import *
-from Eccang.fetch.fetch_record import *
+from base.eccang_base import eccang
+from base.utils import SQL_CREATE_STATEMENT_FROM_DATAFRAME
+from fetch.base_fetch import *
+from fetch.fetch_record import *
 
