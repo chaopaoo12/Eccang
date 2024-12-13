@@ -8,7 +8,7 @@
 '''
 
 # here put the import lib
-from Eccang.Eccang.eccang_base import eccang
+from eccang_base import eccang
 
 
 def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
