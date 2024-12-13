@@ -23,7 +23,7 @@ def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=No
 
 
 def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=None, update_datetime=None):
-    # 采购单
+    # 采购单 *********
     EC = eccang(path)
     if create_datetime is not None:
         # 采购单 创建

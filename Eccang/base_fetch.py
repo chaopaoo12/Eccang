@@ -27,7 +27,7 @@ def getWarehousesInfo(path='setting.json'):
 
 
 def getWarehouseShippingForOrder(path='setting.json'):
-    # 获取仓库配送方式
+    # 获取仓库配送方式 *********
     EC = eccang(path)
     res = EC.get_data(interface_name='getWarehouseShippingForOrder', biz_content={'page':1,'page_size':100}, data_format='json')
     for k, v in res[0].items():
@@ -61,7 +61,7 @@ def getSupplier(path='setting.json'):
 
 
 def getWmsProductList(path='setting.json', end_date=None, create_date=None):
-    # wms产品列表
+    # wms产品列表 *********
     EC = eccang(path)
     WmsProductList = EC.get_data(interface_name='getWmsProductList',
                                  biz_content={'page':1,'page_size':1000,
@@ -107,6 +107,3 @@ def getAuthAdStoreSiteList(path='setting.json'):
     AuthAdStoreSiteList = EC.get_data(interface_name='GetAuthAdStoreSiteList',
                                       biz_content={'page':1,'page_size':1000}, data_format='dataframe')
     return (AuthAdStoreSiteList)
-
-
-
