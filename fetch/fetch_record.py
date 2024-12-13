@@ -114,7 +114,7 @@ def getRmaReturnList(path='setting.json', end_datetime=None, create_datetime=Non
 
 
 def getShipBatch(path='setting.json', end_date=None, create_date=None):
-    # 头程数据 批次库存 库龄计算
+    # 头程数据
     #todo: userid传入
     EC = eccang(path)
     ShipBatch = EC.get_data(interface_name='getShipBatch',
@@ -134,3 +134,22 @@ def getProductInventory(path='setting.json', end_date=None, update_date=None):
                                                 'update_time_to':end_date},
                                    data_format='dataframe')
     return (ProductInventory)
+
+
+def getInventoryBatch(path='setting.json', end_date=None, create_date=None, update_date=None):
+    # 头程数据
+    #todo: userid传入
+    EC = eccang(path)
+    if create_date is not None:
+        InventoryBatch = EC.get_data(interface_name='getInventoryBatch',
+                                     biz_content={'page':1,'page_size':1000,
+                                                'fifo_time_from':create_date,
+                                                'fifo_time_to':end_date},
+                                    data_format='dataframe')
+    elif update_date is not None:
+        InventoryBatch = EC.get_data(interface_name='getInventoryBatch',
+                                    biz_content={'page':1,'page_size':1000,
+                                                'fifo_time_from':update_date,
+                                                'fifo_time_to':end_date},
+                                    data_format='dataframe')
+    return (InventoryBatch)
