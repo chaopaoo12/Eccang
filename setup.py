@@ -12,11 +12,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="eccang",
+    name="Eccang",
     version="1.0",
     author="chaopaoo12",
     author_email="chaopaoo12@hotmail.com",
-    description="eccang",
+    description="Eccang",
 
     # 项目主页
 

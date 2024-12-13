@@ -9,7 +9,7 @@
 
 # here put the import lib
 
-from eccang_base import eccang
+from Eccang.eccang_base import eccang
 
 
 def getWarehouseList(path='setting.json'):
