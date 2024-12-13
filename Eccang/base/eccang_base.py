@@ -101,9 +101,14 @@ class eccang():
             try:
                 data = data.json()
             except:
-                print("Error: ", data.text)
+                print(data.text)
+                data = {'code': data.text}
 
-            if data.get('code') == "common.error.code.0028":
+            if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
+                print("请求频率超限，请控制请求速度")
+                time.sleep(10)
+                continue
+            elif data.get('code') == "common.error.code.0028":
                 print("加密串: ", sign_str)
                 print("参数列表: ", params1)
                 print("request_body: ", data.request.body)
