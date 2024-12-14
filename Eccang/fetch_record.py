@@ -80,7 +80,7 @@ def getPutAwayList(path='setting.json', end_date=None, start_date=None):
 
 
 def getDeliveryDetailList(path='setting.json', end_date=None, start_date=None):
-    # 出库明细
+    # 出库明细  接口数据不明确
     EC = eccang(path)
     DeliveryDetailList = EC.get_data(interface_name='getDeliveryDetailList',
                                      biz_content={'page':1,'page_size':100,
@@ -96,6 +96,8 @@ def getOrderList(path='setting.json', end_datetime=None, create_datetime=None):
     EC = eccang(path)
     OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
+                                         'get_detail':1,'get_address':1,
+                                         'get_custom_order_type':1,
                                          'condition':{'created_date_start':create_datetime,
                                                       'created_date_end':end_datetime}},
                             data_format='dataframe')
