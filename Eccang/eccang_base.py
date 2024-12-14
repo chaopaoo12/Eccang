@@ -78,6 +78,8 @@ class eccang():
 
 
     def get_data(self, interface_name, biz_content, data_format='json'):
+        
+        biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
         if len(biz_content) > 0:
             page = int(biz_content.get('page'))
