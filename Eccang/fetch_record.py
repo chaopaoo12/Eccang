@@ -91,15 +91,50 @@ def getDeliveryDetailList(path='setting.json', end_date=None, start_date=None):
     return (DeliveryDetailList)
 
 
-def getOrderList(path='setting.json', end_datetime=None, create_datetime=None):
+def getOrderList(path='setting.json', end_datetime=None, 
+                 create_datetime=None, update_datetime=None, ship_datetime=None,
+                 paid_datetime=None, delivered_datetime=None):
     # 订单列表
     EC = eccang(path)
-    OrderList = EC.get_data(interface_name='getOrderList',
+    if create_datetime is not None:
+        OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
                                          'get_detail':1,'get_address':1,
                                          'get_custom_order_type':1,
                                          'condition':{'created_date_start':create_datetime,
                                                       'created_date_end':end_datetime}},
+                            data_format='dataframe')
+    elif update_datetime is not None:
+        OrderList = EC.get_data(interface_name='getOrderList',
+                            biz_content={'page':1,'page_size':100,
+                                         'get_detail':1,'get_address':1,
+                                         'get_custom_order_type':1,
+                                         'condition':{'update_date_start':create_datetime,
+                                                      'update_date_end':end_datetime}},
+                            data_format='dataframe')
+    elif ship_datetime is not None:
+        OrderList = EC.get_data(interface_name='getOrderList',
+                            biz_content={'page':1,'page_size':100,
+                                         'get_detail':1,'get_address':1,
+                                         'get_custom_order_type':1,
+                                         'condition':{'ship_date_start':create_datetime,
+                                                      'ship_date_end':end_datetime}},
+                            data_format='dataframe')
+    elif paid_datetime is not None:
+        OrderList = EC.get_data(interface_name='getOrderList',
+                            biz_content={'page':1,'page_size':100,
+                                         'get_detail':1,'get_address':1,
+                                         'get_custom_order_type':1,
+                                         'condition':{'platform_paid_date_start':create_datetime,
+                                                      'platform_paid_date_end':end_datetime}},
+                            data_format='dataframe')
+    elif delivered_datetime is not None:
+        OrderList = EC.get_data(interface_name='getOrderList',
+                            biz_content={'page':1,'page_size':100,
+                                         'get_detail':1,'get_address':1,
+                                         'get_custom_order_type':1,
+                                         'condition':{'track_delivered_time_start':create_datetime,
+                                                      'track_delivered_time_end':end_datetime}},
                             data_format='dataframe')
     return (OrderList)
 
@@ -134,7 +169,7 @@ def getProductInventory(path='setting.json', end_date=None, update_date=None):
     ProductInventory = EC.get_data(interface_name='getProductInventory',
                                    biz_content={'page':1,'page_size':100,
                                                 'update_time_from':update_date,
-                                                'update_time_to':end_date},
+                                                'update_time_to':end_date} ,
                                    data_format='dataframe')
     return (ProductInventory)
 
