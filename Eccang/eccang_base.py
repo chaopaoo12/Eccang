@@ -143,10 +143,8 @@ class eccang():
                             record_num = len(res['data'])
                             target_page = 1
                         print("Total page: ", target_page)
-                
-                print('1',isinstance(res, dict))
-                print('2',res.get('data'))
-                if isinstance(res, dict) and res.get('data') is False:
+
+                if isinstance(res, list):
                     result.append(res)
                 elif isinstance(res['data'], dict):
                     result.append(res['data'])
