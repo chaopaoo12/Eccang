@@ -103,7 +103,7 @@ class eccang():
             try:
                 data = data.json()
             except:
-                print(data.text)
+                #print(data.text)
                 data = {'code': data.text}
 
             if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
@@ -124,7 +124,7 @@ class eccang():
                 print("Error: ", data.text)
                 break
             else:
-                print(data)
+                #print(data)
                 res = json.loads(data['biz_content'])
 
                 if isinstance(res, list):
