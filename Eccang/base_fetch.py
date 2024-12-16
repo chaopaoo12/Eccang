@@ -46,7 +46,7 @@ def getShippingMethod(path='setting.json'):
 def getProductCategoryBase(path='setting.json'):
     # 品类列表
     EC = eccang(path)
-    ProductCategoryBase = EC.get_data(interface_name='getProductCategoryBase', biz_content={'page':1,'page_size':100}, data_format='json')
+    ProductCategoryBase = EC.get_data(interface_name='getProductCategoryBase', biz_content={'page':1,'page_size':100}, data_format='dataframe')
     return (ProductCategoryBase)
 
 
