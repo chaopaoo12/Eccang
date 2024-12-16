@@ -19,7 +19,7 @@ def getProductBarcodeMapList(path='setting.json', warehouse_code=None):
                                                       'warehouse_code':warehouse_code
                                                       },
                                          data_format='json')
-    return res
+    return pd.DataFrame(res[0])
 
 
 def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
