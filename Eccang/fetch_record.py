@@ -11,18 +11,6 @@
 from Eccang.eccang_base import eccang
 
 
-def getProductBarcodeMapList(path='setting.json', warehouse_code=None):
-    # listing表现-日维度接口
-    EC = eccang(path)
-    res = EC.get_data(interface_name='getProductBarcodeMapList',
-                                         biz_content={'page':1,'page_size':1000,
-                                                      'warehouse_code':warehouse_code
-                                                      },
-                                         data_format='json')
-    import pandas as pd
-    return pd.DataFrame(res[0])
-
-
 def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
     # listing表现-日维度接口
     EC = eccang(path)
