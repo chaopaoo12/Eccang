@@ -9,5 +9,5 @@
 
 # here put the import lib
 
-from base_fetch import *
-from fetch_record import *
+from .base_fetch import *
+from .fetch_record import *
