@@ -44,38 +44,67 @@ def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=No
     return (PurchaseOrders)
 
 
-def getTransferOrders(path='setting.json', end_datetime=None, create_datetime=None):
+def getTransferOrders(path='setting.json', end_date=None, create_date=None, modify_date=None, receiving_date=None):
     # 调拨单 最长查一个月
     EC = eccang(path)
-    TransferOrders = EC.get_data(interface_name='getTransferOrders', 
-                                 biz_content={'page':1,'page_size':100,
-                                              'date_create_for':create_datetime,
-                                              'date_create_to':end_datetime},
-                                 data_format='dataframe')
+    if create_datetime is not None:
+        TransferOrders = EC.get_data(interface_name='getTransferOrders', 
+                                    biz_content={'page':1,'page_size':100,
+                                                'date_create_for':create_date,
+                                                'date_create_to':end_date},
+                                    data_format='dataframe')
+    elif modify_datetime is not None:
+        TransferOrders = EC.get_data(interface_name='getTransferOrders', 
+                                    biz_content={'page':1,'page_size':100,
+                                                'date_last_modify_for':modify_date,
+                                                'date_last_modify_to':end_date},
+                                    data_format='dataframe')
+    elif receiving_datetime is not None:
+        TransferOrders = EC.get_data(interface_name='getTransferOrders', 
+                                    biz_content={'page':1,'page_size':100,
+                                                'data_receiving_for':receiving_date,
+                                                'data_receiving_to':end_date},
+                                    data_format='dataframe')
     return (TransferOrders)
 
 
-def getReceiving(path='setting.json', end_datetime=None, create_datetime=None):
+def getReceiving(path='setting.json', end_datetime=None, create_datetime=None, update_datetime=None):
     # 入库单
     EC = eccang(path)
-    Receiving = EC.get_data(interface_name='getReceiving', 
-                            biz_content={'page':1,'page_size':100,
-                                         'search_date_type':'receiving_add_time',
-                                         'date_for':create_datetime,
-                                         'date_to':end_datetime},
-                            data_format='dataframe')
+    if create_datetime is not None:
+        Receiving = EC.get_data(interface_name='getReceiving', 
+                                biz_content={'page':1,'page_size':100,
+                                            'search_date_type':'receiving_add_time',
+                                            'date_for':create_datetime,
+                                            'date_to':end_datetime},
+                                data_format='dataframe')
+    elif update_datetime is not None:
+        Receiving = EC.get_data(interface_name='getReceiving', 
+                                biz_content={'page':1,'page_size':100,
+                                            'search_date_type':'receiving_update_time',
+                                            'date_for':update_datetime,
+                                            'date_to':end_datetime},
+                                data_format='dataframe')
     return (Receiving)
 
 
-def getPutAwayList(path='setting.json', end_date=None, start_date=None):
+def getPutAwayList(path='setting.json', end_date=None, start_date=None, put_date=None):
     # 上架单
     EC = eccang(path)
-    PutAwayList = EC.get_data(interface_name='getPutAwayList',
-                              biz_content={'page':1,'page_size':50,
-                                           'date_type':1,
-                                           'start_date':start_date,
-                                           'end_date':end_date}, 
-                              data_format='dataframe')
+    if start_date is None:
+        PutAwayList = EC.get_data(interface_name='getPutAwayList',
+                                biz_content={'page':1,'page_size':50,
+                                            'date_type':1,
+                                            'start_date':start_date,
+                                            'end_date':end_date}, 
+                                data_format='dataframe')
+    elif put_date is None:
+        PutAwayList = EC.get_data(interface_name='getPutAwayList',
+                                biz_content={'page':1,'page_size':50,
+                                            'date_type':2,
+                                            'start_date':put_date,
+                                            'end_date':end_date}, 
+                                data_format='dataframe')
     return (PutAwayList)
 
 
@@ -150,16 +179,24 @@ def getRmaReturnList(path='setting.json', end_datetime=None, create_datetime=Non
     return (ReturnList)
 
 
-def getShipBatch(path='setting.json', user_id=None, end_date=None, create_date=None):
+def getShipBatch(path='setting.json', user_id=None, end_date=None, create_date=None, update_date=None):
     # 头程数据
     #todo: userid传入
     EC = eccang(path)
-    ShipBatch = EC.get_data(interface_name='getShipBatch',
-                            biz_content={'page':1,'page_size':1000,
-                                         'user_id':user_id,
-                                         'date_for':create_date,
-                                         'date_to':end_date},
-                            data_format='dataframe')
+    if create_date is not None:
+        ShipBatch = EC.get_data(interface_name='getShipBatch',
+                                biz_content={'page':1,'page_size':1000,
+                                            'user_id':user_id,
+                                            'date_for':create_date,
+                                            'date_to':end_date},
+                                data_format='dataframe')
+    elif update_date is not None:
+        ShipBatch = EC.get_data(interface_name='getShipBatch',
+                                biz_content={'page':1,'page_size':1000,
+                                            'user_id':user_id,
+                                            'update_for':update_date,
+                                            'update_to':end_date},
+                                data_format='dataframe')
     return (ShipBatch)
 
 
