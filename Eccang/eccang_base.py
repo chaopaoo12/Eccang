@@ -143,6 +143,7 @@ class eccang():
                             record_num = len(res['data'])
                             target_page = 1
                         print("Total page: ", target_page)
+                
                 print('1',isinstance(res, dict))
                 
                 print('2',res.get('data'))
