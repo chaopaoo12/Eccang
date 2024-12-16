@@ -19,6 +19,7 @@ def getProductBarcodeMapList(path='setting.json', warehouse_code=None):
                                                       'warehouse_code':warehouse_code
                                                       },
                                          data_format='json')
+    import pandas as pd
     return pd.DataFrame(res[0])
 
 
