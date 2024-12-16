@@ -81,21 +81,21 @@ def getAmazonListing(path='setting.json', end_date=None, create_date=None, updat
     if create_date is not None:
         # 亚马逊listing 创建
         AmazonListing = EC.get_data(interface_name='AmazonListing',
-                                    biz_content={'page':1,'page_size':10000,
+                                    biz_content={'page':1,'page_size':1000,
                                                 'open_date_local_start':create_date,
                                                 'open_date_local_end':end_date},
                                     data_format='dataframe')
     elif update_date is not None:
         # 亚马逊listing 更新
         AmazonListing = EC.get_data(interface_name='AmazonListing',
-                                    biz_content={'page':1,'page_size':10000,
+                                    biz_content={'page':1,'page_size':1000,
                                                 'updated_time_start':update_date,
                                                 'updated_time_end':end_date},
                                     data_format='dataframe')
     else:
         # 亚马逊listing 全部
         AmazonListing = EC.get_data(interface_name='AmazonListing',
-                                    biz_content={'page':1,'page_size':10000},
+                                    biz_content={'page':1,'page_size':1000},
                                     data_format='dataframe')
     return (AmazonListing)
 
