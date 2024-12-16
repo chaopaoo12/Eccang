@@ -65,6 +65,10 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None):
     EC = eccang(path)
     WmsProductList = EC.get_data(interface_name='getWmsProductList',
                                  biz_content={'page':1,'page_size':1000,
+                                              'get_product_combination':1,
+                                              'get_product_box':1,
+                                              'get_property':1,
+                                              'get_product_custom_category':1,
                                               'product_add_time_from':create_date,
                                               'product_add_time_to':end_date},
                                  data_format='dataframe')
