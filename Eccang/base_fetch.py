@@ -39,7 +39,7 @@ def getWarehouseShippingForOrder(path='setting.json'):
 def getShippingMethod(path='setting.json'):
     # 获取配送方式
     EC = eccang(path)
-    ShippingMethod = EC.get_data(interface_name='getShippingMethod', biz_content={'page':1,'page_size':100}, data_format='json')
+    ShippingMethod = EC.get_data(interface_name='getShippingMethod', biz_content={'page':1,'page_size':100}, data_format='dataframe')
     return (ShippingMethod)
 
 
