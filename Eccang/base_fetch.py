@@ -92,6 +92,11 @@ def getAmazonListing(path='setting.json', end_date=None, create_date=None, updat
                                                 'updated_time_start':update_date,
                                                 'updated_time_end':end_date},
                                     data_format='dataframe')
+    else:
+        # 亚马逊listing 全部
+        AmazonListing = EC.get_data(interface_name='AmazonListing',
+                                    biz_content={'page':1,'page_size':100},
+                                    data_format='dataframe')
     return (AmazonListing)
 
 
