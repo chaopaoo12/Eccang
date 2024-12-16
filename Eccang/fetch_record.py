@@ -109,7 +109,7 @@ def getOrderList(path='setting.json', end_datetime=None,
                             biz_content={'page':1,'page_size':100,
                                          'get_detail':1,'get_address':1,
                                          'get_custom_order_type':1,
-                                         'condition':{'update_date_start':create_datetime,
+                                         'condition':{'update_date_start':update_datetime,
                                                       'update_date_end':end_datetime}},
                             data_format='dataframe')
     elif ship_datetime is not None:
@@ -117,7 +117,7 @@ def getOrderList(path='setting.json', end_datetime=None,
                             biz_content={'page':1,'page_size':100,
                                          'get_detail':1,'get_address':1,
                                          'get_custom_order_type':1,
-                                         'condition':{'ship_date_start':create_datetime,
+                                         'condition':{'ship_date_start':ship_datetime,
                                                       'ship_date_end':end_datetime}},
                             data_format='dataframe')
     elif paid_datetime is not None:
@@ -125,7 +125,7 @@ def getOrderList(path='setting.json', end_datetime=None,
                             biz_content={'page':1,'page_size':100,
                                          'get_detail':1,'get_address':1,
                                          'get_custom_order_type':1,
-                                         'condition':{'platform_paid_date_start':create_datetime,
+                                         'condition':{'platform_paid_date_start':paid_datetime,
                                                       'platform_paid_date_end':end_datetime}},
                             data_format='dataframe')
     elif delivered_datetime is not None:
@@ -133,7 +133,7 @@ def getOrderList(path='setting.json', end_datetime=None,
                             biz_content={'page':1,'page_size':100,
                                          'get_detail':1,'get_address':1,
                                          'get_custom_order_type':1,
-                                         'condition':{'track_delivered_time_start':create_datetime,
+                                         'condition':{'track_delivered_time_start':delivered_datetime,
                                                       'track_delivered_time_end':end_datetime}},
                             data_format='dataframe')
     return (OrderList)
