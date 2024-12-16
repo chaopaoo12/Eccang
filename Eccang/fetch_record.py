@@ -19,10 +19,7 @@ def getProductBarcodeMapList(path='setting.json', warehouse_code=None):
                                                       'warehouse_code':warehouse_code
                                                       },
                                          data_format='json')
-    for k, v in res[0].items():
-        v['code'] = k
-    import pandas as pd
-    return pd.DataFrame(res[0].values())
+    return res
 
 
 def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
