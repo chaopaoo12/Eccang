@@ -102,8 +102,9 @@ class eccang():
             data = post_request(params1)
             try:
                 data = data.json()
+                print(data)
             except:
-                print(data.text)
+                #print(data.text)
                 data = {'code': data.text}
 
             if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
