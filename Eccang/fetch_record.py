@@ -47,19 +47,19 @@ def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=No
 def getTransferOrders(path='setting.json', end_date=None, create_date=None, modify_date=None, receiving_date=None):
     # 调拨单 最长查一个月
     EC = eccang(path)
-    if create_datetime is not None:
+    if create_date is not None:
         TransferOrders = EC.get_data(interface_name='getTransferOrders', 
                                     biz_content={'page':1,'page_size':100,
                                                 'date_create_for':create_date,
                                                 'date_create_to':end_date},
                                     data_format='dataframe')
-    elif modify_datetime is not None:
+    elif modify_date is not None:
         TransferOrders = EC.get_data(interface_name='getTransferOrders', 
                                     biz_content={'page':1,'page_size':100,
                                                 'date_last_modify_for':modify_date,
                                                 'date_last_modify_to':end_date},
                                     data_format='dataframe')
-    elif receiving_datetime is not None:
+    elif receiving_date is not None:
         TransferOrders = EC.get_data(interface_name='getTransferOrders', 
                                     biz_content={'page':1,'page_size':100,
                                                 'data_receiving_for':receiving_date,
