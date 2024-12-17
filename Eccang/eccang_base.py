@@ -102,7 +102,6 @@ class eccang():
             data = post_request(params1)
             try:
                 data = data.json()
-                print(data)
             except:
                 #print(data.text)
                 data = {'code': data.text}
@@ -137,6 +136,12 @@ class eccang():
                                 record_num = int(res['total'])
                             except:
                                 record_num = int(data['total_count'])
+
+                            try:
+                                record_num = int(res['count'])
+                            except:
+                                record_num = int(data['total_count'])
+
                             target_page = ceil(record_num/page_size)
                         except:
                             print("No total/total_count")
