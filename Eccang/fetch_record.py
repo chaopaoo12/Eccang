@@ -97,14 +97,14 @@ def getPutAwayList(path='setting.json', end_date=None, start_date=None, put_date
                                             'date_type':1,
                                             'start_date':start_date,
                                             'end_date':end_date}, 
-                                data_format='dataframe')
+                                data_format='json')
     elif put_date is None:
         PutAwayList = EC.get_data(interface_name='getPutAwayList',
                                 biz_content={'page':1,'page_size':50,
                                             'date_type':2,
                                             'start_date':put_date,
                                             'end_date':end_date}, 
-                                data_format='dataframe')
+                                data_format='json')
     return (PutAwayList)
 
 
