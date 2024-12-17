@@ -109,7 +109,7 @@ def getPutAwayList(path='setting.json', end_date=None, start_date=None, put_date
 
 
 def getDeliveryDetailList(path='setting.json', end_datetime=None, start_datetime=None):
-    # 出库明细  接口数据不明确
+    # 出库明细 
     EC = eccang(path)
     DeliveryDetailList = EC.get_data(interface_name='getDeliveryDetailList',
                                      biz_content={'page':1,'page_size':100,
