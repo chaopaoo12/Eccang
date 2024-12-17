@@ -166,4 +166,7 @@ class eccang():
         if data_format == 'json':
             return result
         elif data_format == 'dataframe':
-            return (pd.DataFrame(result))
+            if len(result) > 1:
+                return (pd.DataFrame(result))
+            else:
+                return (pd.DataFrame(result[0]))
