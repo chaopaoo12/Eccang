@@ -143,13 +143,15 @@ class eccang():
                             record_num = len(res['data'])
                             target_page = 1
                         print("Total page: ", target_page)
-
-                if isinstance(res, list):
-                    result.append(res)
-                elif isinstance(res['data'], dict):
-                    result.append(res['data'])
-                else:
-                    result.extend(res['data'])
+                try:
+                    if isinstance(res, list):
+                        result.append(res)
+                    elif isinstance(res['data'], dict):
+                        result.append(res['data'])
+                    else:
+                        result.extend(res['data'])
+                except:
+                    print(res)
 
                 page += 1
 
