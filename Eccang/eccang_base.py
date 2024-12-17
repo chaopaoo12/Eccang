@@ -124,7 +124,6 @@ class eccang():
                 print("Error: ", data.text)
                 break
             else:
-                print(data)
                 res = json.loads(data['biz_content'])
 
                 if isinstance(res, list):
@@ -140,12 +139,17 @@ class eccang():
                             target_page = ceil(record_num/page_size)
                         except:
                             print("No total/total_count")
-                            record_num = len(res['data'])
+                            if interface_name == 'getPutAwayList':
+                                record_num = len(res['data_list'])
+                            else:
+                                record_num = len(res['data'])                            
                             target_page = 1
                         print("Total page: ", target_page)
                 try:
                     if isinstance(res, list):
                         result.append(res)
+                    elif interface_name == 'getPutAwayList':
+                        result.append(res['data_list'])
                     elif isinstance(res['data'], dict):
                         result.append(res['data'])
                     else:
