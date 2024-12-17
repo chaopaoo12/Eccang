@@ -103,7 +103,7 @@ class eccang():
             try:
                 data = data.json()
             except:
-                #print(data.text)
+                print(data.text)
                 data = {'code': data.text}
 
             if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
@@ -142,7 +142,7 @@ class eccang():
                             if interface_name == 'getPutAwayList':
                                 record_num = len(res['data_list'])
                             else:
-                                record_num = len(res['data'])                            
+                                record_num = len(res['data'])
                             target_page = 1
                         print("Total page: ", target_page)
                 try:
