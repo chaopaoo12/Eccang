@@ -124,7 +124,7 @@ class eccang():
                 print("Error: ", data.text)
                 break
             else:
-                #print(data)
+                print(data)
                 res = json.loads(data['biz_content'])
 
                 if isinstance(res, list):
