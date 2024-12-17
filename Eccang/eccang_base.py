@@ -135,12 +135,17 @@ class eccang():
                             try:
                                 record_num = int(res['total'])
                             except:
-                                record_num = int(data['total_count'])
+                                pass
 
                             try:
                                 record_num = int(res['count'])
                             except:
+                                pass
+                                
+                            try:
                                 record_num = int(data['total_count'])
+                            except:
+                                pass
 
                             target_page = ceil(record_num/page_size)
                         except:
