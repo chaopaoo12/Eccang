@@ -212,7 +212,6 @@ def getProductInventory(path='setting.json', end_date=None, update_date=None):
 
 def getInventoryBatch(path='setting.json', end_date=None, create_date=None, update_date=None):
     # 头程数据
-    #todo: userid传入
     EC = eccang(path)
     if create_date is not None:
         InventoryBatch = EC.get_data(interface_name='getInventoryBatch',

@@ -60,18 +60,29 @@ def getSupplier(path='setting.json'):
     return pd.DataFrame(res[0].values())
 
 
-def getWmsProductList(path='setting.json', end_date=None, create_date=None):
+def getWmsProductList(path='setting.json', end_date=None, create_date=None, update_date=None):
     # wms产品列表 *********
     EC = eccang(path)
-    WmsProductList = EC.get_data(interface_name='getWmsProductList',
-                                 biz_content={'page':1,'page_size':1000,
-                                              'get_product_combination':1,
-                                              'get_product_box':1,
-                                              'get_property':1,
-                                              'get_product_custom_category':1,
-                                              'product_add_time_from':create_date,
-                                              'product_add_time_to':end_date},
-                                 data_format='dataframe')
+    if create_date is not None:
+        WmsProductList = EC.get_data(interface_name='getWmsProductList',
+                                    biz_content={'page':1,'page_size':1000,
+                                                'get_product_combination':1,
+                                                'get_product_box':1,
+                                                'get_property':1,
+                                                'get_product_custom_category':1,
+                                                'product_add_time_from':create_date,
+                                                'product_add_time_to':end_date},
+                                    data_format='dataframe')
+    elif update_date is not None:
+        WmsProductList = EC.get_data(interface_name='getWmsProductList',
+                                    biz_content={'page':1,'page_size':1000,
+                                                'get_product_combination':1,
+                                                'get_product_box':1,
+                                                'get_property':1,
+                                                'get_product_custom_category':1,
+                                                'product_update_time_from':update_date,
+                                                'product_update_time_to':end_date},
+                                    data_format='dataframe')
     return (WmsProductList)
 
 
@@ -116,6 +127,7 @@ def getAuthAdStoreSiteList(path='setting.json'):
     AuthAdStoreSiteList = EC.get_data(interface_name='GetAuthAdStoreSiteList',
                                       biz_content={'page':1,'page_size':1000}, data_format='dataframe')
     return (AuthAdStoreSiteList)
+
 
 def getProductBarcodeMapList(path='setting.json', warehouse_code=None):
     # listing表现-日维度接口

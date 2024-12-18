@@ -125,7 +125,6 @@ class eccang():
                 break
             else:
                 res = json.loads(data['biz_content'])
-
                 if isinstance(res, list):
                     record_num = len(res)
                     target_page = 1
@@ -133,7 +132,17 @@ class eccang():
                     if page == 1:
                         try:
                             try:
+                                record_num = int(data['total'])
+                            except:
+                                pass
+
+                            try:
                                 record_num = int(res['total'])
+                            except:
+                                pass
+
+                            try:
+                                record_num = int(data['count'])
                             except:
                                 pass
 
@@ -141,15 +150,20 @@ class eccang():
                                 record_num = int(res['count'])
                             except:
                                 pass
-                                
+
                             try:
                                 record_num = int(data['total_count'])
                             except:
                                 pass
 
+                            try:
+                                record_num = int(res['total_count'])
+                            except:
+                                pass
+
                             target_page = ceil(record_num/page_size)
                         except:
-                            print("No total/total_count")
+                            print("No total/count/total_count")
                             if interface_name == 'getPutAwayList':
                                 record_num = len(res['data_list'])
                             else:
@@ -179,5 +193,7 @@ class eccang():
         elif data_format == 'dataframe':
             if len(result) > 1:
                 return (pd.DataFrame(result))
-            else:
+            elif len(result) == 1:
                 return (pd.DataFrame(result[0]))
+            else:
+                return (pd.DataFrame())
