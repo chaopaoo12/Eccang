@@ -191,9 +191,17 @@ class eccang():
         if data_format == 'json':
             return result
         elif data_format == 'dataframe':
-            if len(result) > 1:
+
+            if len(result) > 1 and isinstance(result, list):
                 return (pd.DataFrame(result))
+            elif len(result) == 1 and isinstance(result, list):
+                try:
+                    return (pd.DataFrame(result[0]))
+                except:
+                    return (pd.DataFrame([list(result[0].values())], columns=list(result[0].keys())))
+            elif len(result) == 1 and isinstance(result, dict):
+                return (pd.DataFrame([list(result.values())], columns=list(result.keys())))
             elif len(result) == 1:
-                return (pd.DataFrame(result[0]))
+                return (pd.DataFrame(result))
             else:
-                return (pd.DataFrame())
+                return (pd.DataFrame(result))
