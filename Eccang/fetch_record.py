@@ -226,3 +226,12 @@ def getInventoryBatch(path='setting.json', end_date=None, create_date=None, upda
                                                 'fifo_time_to':end_date},
                                     data_format='dataframe')
     return (InventoryBatch)
+
+def getCurrencyList(path='setting.json', end_datetime=None, create_datetime=None):
+    # 货币汇率
+    EC = eccang(path)
+    InventoryBatch = EC.get_data(interface_name='getCurrencyList',
+                                     biz_content={'page':1,'page_size':1000,
+                                                'start_day':create_datetime,
+                                                'end_day':end_datetime},
+                                    data_format='dataframe')

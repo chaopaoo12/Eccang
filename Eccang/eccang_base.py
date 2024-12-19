@@ -100,6 +100,7 @@ class eccang():
 
             params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
+            
             try:
                 data = data.json()
             except:
@@ -108,6 +109,14 @@ class eccang():
 
             if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
                 print("请求频率超限，请控制请求速度")
+                time.sleep(10)
+                continue
+            elif data.get('code') == "common.error.code.9999":
+                print("加密串: ", sign_str)
+                print("参数列表: ", params1)
+                print("request_body: ", data.request.body)
+                print("Error: ", data.text)
+                print("系统异常")
                 time.sleep(10)
                 continue
             elif data.get('code') == "common.error.code.0028":
