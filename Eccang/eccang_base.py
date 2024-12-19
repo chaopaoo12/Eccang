@@ -90,8 +90,10 @@ class eccang():
 
         target_page = 2
         result = []
+        retry_count = 0
+        max_retry_count = 5
 
-        while page <= target_page:
+        while page <= target_page and retry_count < max_retry_count:
             print("page: ", page)
             biz_content['page'] = page
             self.build_connect(interface_name, biz_content)
@@ -100,7 +102,7 @@ class eccang():
 
             params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
-            
+
             try:
                 data = data.json()
             except:
@@ -109,6 +111,7 @@ class eccang():
 
             if data.get('code') == '<h3 align="center">请求频率超限，请控制请求速度</h3>\n':
                 print("请求频率超限，请控制请求速度")
+                retry_count += 1
                 time.sleep(10)
                 continue
             elif data.get('code') == "common.error.code.9999":
@@ -117,6 +120,7 @@ class eccang():
                 print("request_body: ", data.request.body)
                 print("Error: ", data.text)
                 print("系统异常")
+                retry_count += 1
                 time.sleep(10)
                 continue
             elif data.get('code') == "common.error.code.0028":
@@ -134,6 +138,7 @@ class eccang():
                 break
             else:
                 res = json.loads(data['biz_content'])
+                retry_count = 0
                 if isinstance(res, list):
                     record_num = len(res)
                     target_page = 1
