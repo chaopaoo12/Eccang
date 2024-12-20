@@ -78,7 +78,7 @@ class eccang():
 
 
     def get_data(self, interface_name, biz_content, data_format='json'):
-        
+
         biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
         if len(biz_content) > 0:
@@ -91,7 +91,7 @@ class eccang():
         target_page = 2
         result = []
         retry_count = 0
-        max_retry_count = 5
+        max_retry_count = 99999
 
         while page <= target_page and retry_count < max_retry_count:
             print("page: ", page)
@@ -209,6 +209,7 @@ class eccang():
             if len(result) > 1 and isinstance(result, list):
                 return (pd.DataFrame(result))
             elif len(result) == 1 and isinstance(result, list):
+
                 try:
                     return (pd.DataFrame(result[0]))
                 except:
