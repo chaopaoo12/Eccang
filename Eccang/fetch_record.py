@@ -32,7 +32,7 @@ def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=No
                                                   'search_date_type':'createDate',
                                                   'date_for':create_datetime,
                                                   'date_to':end_datetime},
-                                     to_json=['track','systemtrack','detail','payment_note'],
+                                     to_json=['track','detail','payment_note'],
                                      data_format='dataframe')
     elif update_datetime is not None:
         # 采购单 刷新状态
@@ -41,7 +41,7 @@ def getPurchaseOrders(path='setting.json', end_datetime=None, create_datetime=No
                                                   'search_date_type':'updateTime',
                                                   'date_for':update_datetime,
                                                   'date_to':end_datetime},
-                                     to_json=['track','systemtrack','detail','payment_note'],
+                                     to_json=['track','detail','payment_note'],
                                      data_format='dataframe')
     return (PurchaseOrders)
 
