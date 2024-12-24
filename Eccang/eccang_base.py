@@ -221,7 +221,7 @@ class eccang():
             else:
                 result = pd.DataFrame(result)
 
-            if to_json is not None and len(to_json) > 0 and data_format == 'dataframe':
+            if to_json is not None and len(to_json) > 0 and data_format == 'dataframe' and result.shape[0] > 0:
                 for i in to_json:
                    result[i] = result[i].apply(lambda x: json.dumps(x,indent=2,ensure_ascii=False))
 
