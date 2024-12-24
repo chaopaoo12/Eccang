@@ -77,7 +77,7 @@ class eccang():
         }
 
 
-    def get_data(self, interface_name, biz_content, data_format='json'):
+    def get_data(self, interface_name, biz_content, to_json=None, data_format='json'):
 
         biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
@@ -202,9 +202,15 @@ class eccang():
             print("Total: ", len(result), " Success!")
         else:
             print("result: ", len(result), "target_page: ", record_num, " Error!")
+
         if data_format == 'json':
             return result
         elif data_format == 'dataframe':
+
+            if to_json is not None and len(to_json) > 0:
+                for i in to_json:
+                   for j in result:
+                       j[i] = json.dumps(j[i], indent=2, ensure_ascii=False)
 
             if len(result) > 1 and isinstance(result, list):
                 return (pd.DataFrame(result))
