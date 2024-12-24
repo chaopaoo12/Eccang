@@ -208,9 +208,8 @@ class eccang():
         elif data_format == 'dataframe':
 
             if len(result) > 1 and isinstance(result, list):
-                return (pd.DataFrame(result))
+                result = pd.DataFrame(result)
             elif len(result) == 1 and isinstance(result, list):
-
                 try:
                     result = pd.DataFrame(result[0])
                 except:
