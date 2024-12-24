@@ -207,22 +207,23 @@ class eccang():
             return result
         elif data_format == 'dataframe':
 
-            if to_json is not None and len(to_json) > 0:
-                for i in to_json:
-                   for j in result:
-                       j[i] = json.dumps(j[i], indent=2, ensure_ascii=False)
-
             if len(result) > 1 and isinstance(result, list):
                 return (pd.DataFrame(result))
             elif len(result) == 1 and isinstance(result, list):
 
                 try:
-                    return (pd.DataFrame(result[0]))
+                    result = pd.DataFrame(result[0])
                 except:
-                    return (pd.DataFrame([list(result[0].values())], columns=list(result[0].keys())))
+                    result = pd.DataFrame([list(result[0].values())], columns=list(result[0].keys()))
             elif len(result) == 1 and isinstance(result, dict):
-                return (pd.DataFrame([list(result.values())], columns=list(result.keys())))
+                result = pd.DataFrame([list(result.values())], columns=list(result.keys()))
             elif len(result) == 1:
-                return (pd.DataFrame(result))
+                result = pd.DataFrame(result)
             else:
-                return (pd.DataFrame(result))
+                result = pd.DataFrame(result)
+
+            if to_json is not None and len(to_json) > 0 and data_format == 'dataframe':
+                for i in to_json:
+                   result[i] = result[i].apply(lambda x: json.dumps(x,indent=2,ensure_ascii=False))
+
+            return result
