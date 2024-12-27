@@ -60,7 +60,7 @@ def getSupplier(path='setting.json'):
     return pd.DataFrame(res[0].values())
 
 
-def getWmsProductList(path='setting.json', end_date=None, create_date=None, update_date=None):
+def getWmsProductList(path='setting.json', end_date=None, create_date=None, update_date=None, silence=True):
     # wms产品列表 *********
     EC = eccang(path)
     if create_date is not None:
@@ -72,6 +72,7 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'get_product_custom_category':1,
                                                 'product_add_time_from':create_date,
                                                 'product_add_time_to':end_date},
+                                    silence=silence, 
                                     data_format='dataframe')
     elif update_date is not None:
         WmsProductList = EC.get_data(interface_name='getWmsProductList',
@@ -82,6 +83,7 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'get_product_custom_category':1,
                                                 'product_update_time_from':update_date,
                                                 'product_update_time_to':end_date},
+                                    silence=silence, 
                                     data_format='dataframe')
     return (WmsProductList)
 
