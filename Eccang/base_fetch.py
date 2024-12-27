@@ -85,6 +85,15 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'product_update_time_to':end_date},
                                     silence=silence, 
                                     data_format='dataframe')
+    else:
+        WmsProductList = EC.get_data(interface_name='getWmsProductList',
+                                    biz_content={'page':1,'page_size':1000,
+                                                'get_product_combination':1,
+                                                'get_product_box':1,
+                                                'get_property':1,
+                                                'get_product_custom_category':1},
+                                    silence=silence, 
+                                    data_format='dataframe')
     return (WmsProductList)
 
 
