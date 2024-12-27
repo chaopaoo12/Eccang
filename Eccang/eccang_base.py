@@ -129,6 +129,14 @@ class eccang():
                 retry_count += 1
                 time.sleep(10)
                 continue
+            elif data.get('code') == "300":
+                print("加密串: ", sign_str)
+                print("参数列表: ", params1)
+                #print("request_body: ", data.request.body)
+                print("Error: ", data)
+                retry_count += 1
+                time.sleep(10)
+                continue
             elif data.get('code') == "common.error.code.0028":
                 print("加密串: ", sign_str)
                 print("参数列表: ", params1)
