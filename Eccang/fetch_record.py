@@ -128,7 +128,7 @@ def getDeliveryDetailList(path='setting.json', end_datetime=None, start_datetime
 
 def getOrderList(path='setting.json', end_datetime=None, 
                  create_datetime=None, update_datetime=None, ship_datetime=None,
-                 paid_datetime=None, delivered_datetime=None):
+                 paid_datetime=None, delivered_datetime=None, silence = True):
     # 订单列表
     EC = eccang(path)
     if create_datetime is not None:
@@ -139,7 +139,8 @@ def getOrderList(path='setting.json', end_datetime=None,
                                          'condition':{'created_date_start':create_datetime,
                                                       'created_date_end':end_datetime}},
                             to_json=['order_details','order_address'],
-                            data_format='dataframe')
+                            data_format='dataframe'
+                            , silence = silence)
     elif update_datetime is not None:
         OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
@@ -148,7 +149,8 @@ def getOrderList(path='setting.json', end_datetime=None,
                                          'condition':{'update_date_start':update_datetime,
                                                       'update_date_end':end_datetime}},
                             to_json=['order_details','order_address'],
-                            data_format='dataframe')
+                            data_format='dataframe'
+                            , silence = silence)
     elif ship_datetime is not None:
         OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
@@ -157,7 +159,8 @@ def getOrderList(path='setting.json', end_datetime=None,
                                          'condition':{'ship_date_start':ship_datetime,
                                                       'ship_date_end':end_datetime}},
                             to_json=['order_details','order_address'],
-                            data_format='dataframe')
+                            data_format='dataframe'
+                            , silence = silence)
     elif paid_datetime is not None:
         OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
@@ -166,7 +169,8 @@ def getOrderList(path='setting.json', end_datetime=None,
                                          'condition':{'platform_paid_date_start':paid_datetime,
                                                       'platform_paid_date_end':end_datetime}},
                             to_json=['order_details','order_address'],
-                            data_format='dataframe')
+                            data_format='dataframe'
+                            , silence = silence)
     elif delivered_datetime is not None:
         OrderList = EC.get_data(interface_name='getOrderList',
                             biz_content={'page':1,'page_size':100,
@@ -175,7 +179,8 @@ def getOrderList(path='setting.json', end_datetime=None,
                                          'condition':{'track_delivered_time_start':delivered_datetime,
                                                       'track_delivered_time_end':end_datetime}},
                             to_json=['order_details','order_address'],
-                            data_format='dataframe')
+                            data_format='dataframe'
+                            , silence = silence)
     return (OrderList)
 
 

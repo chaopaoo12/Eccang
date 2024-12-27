@@ -77,7 +77,7 @@ class eccang():
         }
 
 
-    def get_data(self, interface_name, biz_content, to_json=None, data_format='json'):
+    def get_data(self, interface_name, biz_content, to_json=None, data_format='json', silence=True):
 
         biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
@@ -137,6 +137,12 @@ class eccang():
                 print("Error: ", data.text)
                 break
             else:
+                if silence == False:
+                    print("加密串: ", sign_str)
+                    print("参数列表: ", params1)
+                    print("respose_data: ", data)
+                    print("request_body: ", data.request.body)
+
                 res = json.loads(data['biz_content'])
                 retry_count = 0
                 if isinstance(res, list):
