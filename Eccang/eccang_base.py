@@ -103,6 +103,12 @@ class eccang():
             params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
 
+            if silence == False and page == 1:
+                print("加密串: ", sign_str)
+                print("参数列表: ", params1)
+                print("respose_data: ", data.text)
+                print("request_body: ", data.request.body)
+
             try:
                 data = data.json()
             except:
@@ -137,11 +143,6 @@ class eccang():
                 print("Error: ", data.text)
                 break
             else:
-                if silence == False:
-                    print("加密串: ", sign_str)
-                    print("参数列表: ", params1)
-                    print("respose_data: ", data)
-                    print("request_body: ", data.request.body)
 
                 res = json.loads(data['biz_content'])
                 retry_count = 0
