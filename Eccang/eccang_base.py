@@ -121,19 +121,25 @@ class eccang():
                 time.sleep(10)
                 continue
             elif data.get('code') == "common.error.code.9999":
-                print("加密串: ", sign_str)
-                print("参数列表: ", params1)
-                print("request_body: ", data.request.body)
-                print("Error: ", data.text)
-                print("系统异常")
+                try:
+                    print("加密串: ", sign_str)
+                    print("参数列表: ", params1)
+                    print("request_body: ", data.request.body)
+                    print("Error: ", data.text)
+                    print("系统异常")
+                except:
+                    pass
                 retry_count += 1
                 time.sleep(10)
                 continue
             elif data.get('code') == "300":
-                print("加密串: ", sign_str)
-                print("参数列表: ", params1)
-                #print("request_body: ", data.request.body)
-                print("Error: ", data)
+                try:
+                    print("加密串: ", sign_str)
+                    print("参数列表: ", params1)
+                    print("Error: ", data)
+                    print("request_body: ", data.request.body)
+                except:
+                    pass
                 retry_count += 1
                 time.sleep(10)
                 continue
