@@ -104,10 +104,13 @@ class eccang():
             data = post_request(params1)
 
             if silence == False and page == 1:
-                print("加密串: ", sign_str)
-                print("参数列表: ", params1)
-                print("respose_data: ", data.text)
-                print("request_body: ", data.request.body)
+                try:
+                    print("加密串: ", sign_str)
+                    print("参数列表: ", params1)
+                    print("respose_data: ", data.text)
+                    print("request_body: ", data.request.body)
+                except:
+                    pass
 
             try:
                 data = data.json()
