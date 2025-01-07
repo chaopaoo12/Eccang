@@ -72,6 +72,7 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'get_product_custom_category':1,
                                                 'product_add_time_from':create_date,
                                                 'product_add_time_to':end_date},
+                                    to_json=['property'],
                                     silence=silence, 
                                     data_format='dataframe')
     elif update_date is not None:
@@ -83,6 +84,7 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'get_product_custom_category':1,
                                                 'product_update_time_from':update_date,
                                                 'product_update_time_to':end_date},
+                                    to_json=['property'],
                                     silence=silence, 
                                     data_format='dataframe')
     else:
@@ -92,6 +94,7 @@ def getWmsProductList(path='setting.json', end_date=None, create_date=None, upda
                                                 'get_product_box':1,
                                                 'get_property':1,
                                                 'get_product_custom_category':1},
+                                    to_json=['property'],
                                     silence=silence, 
                                     data_format='dataframe')
     return (WmsProductList)
