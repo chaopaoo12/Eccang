@@ -244,6 +244,10 @@ def getInventoryBatch(path='setting.json', end_date=None, create_date=None, upda
                                                 'fifo_time_from':update_date,
                                                 'fifo_time_to':end_date},
                                     data_format='dataframe')
+    else:
+        InventoryBatch = EC.get_data(interface_name='getInventoryBatch',
+                                    biz_content={'page':1,'page_size':1000},
+                                    data_format='dataframe')
     return (InventoryBatch)
 
 def getCurrencyList(path='setting.json', end_datetime=None, create_datetime=None):
