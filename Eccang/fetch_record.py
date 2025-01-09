@@ -195,6 +195,17 @@ def getRmaReturnList(path='setting.json', end_datetime=None, create_datetime=Non
     return (ReturnList)
 
 
+def getRmaRefundList(path='setting.json', end_datetime=None, create_datetime=None):
+    # 退货列表
+    EC = eccang(path)
+    ReturnList = EC.get_data(interface_name='getRmaRefundList', 
+                             biz_content={'page':1,'page_size':100,
+                                          'create_date_form':create_datetime,
+                                          'create_date_to':end_datetime},
+                             data_format='dataframe')
+    return (ReturnList)
+
+
 def getShipBatch(path='setting.json', user_id=None, end_date=None, create_date=None, update_date=None):
     # 头程数据
     #todo: userid传入
