@@ -11,14 +11,14 @@
 from Eccang.eccang_base import eccang
 
 
-def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None):
+def getListingSummaryOriginal(path='setting.json', end_date=None, create_date=None, silence = True):
     # listing表现-日维度接口
     EC = eccang(path)
     ListingSummaryOriginal = EC.get_data(interface_name='ListingSummaryOriginal',
                                          biz_content={'page':1,'page_size':1000,
                                                       'start_time':create_date,
                                                       'end_time':end_date},
-                                         data_format='dataframe')
+                                         data_format='dataframe', silence = silence)
     return (ListingSummaryOriginal)
 
 
@@ -236,6 +236,15 @@ def getProductInventory(path='setting.json', end_date=None, update_date=None):
                                    biz_content={'page':1,'page_size':100,
                                                 'update_time_from':update_date,
                                                 'update_time_to':end_date} ,
+                                   data_format='dataframe')
+    return (ProductInventory)
+
+
+def getFbaInventory(path='setting.json'):
+    # 即时库存
+    EC = eccang(path)
+    ProductInventory = EC.get_data(interface_name='getFbaInventory',
+                                   biz_content={'page':1,'page_size':100} ,
                                    data_format='dataframe')
     return (ProductInventory)
 
