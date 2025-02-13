@@ -83,7 +83,7 @@ class eccang():
         }
 
 
-    def get_data(self, interface_name, biz_content, to_json=None, data_format='json', silence=True, sign = True):
+    def get_data(self, interface_name, biz_content, to_json=None, data_format='json', silence=True):
 
         biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
@@ -104,9 +104,7 @@ class eccang():
             biz_content['page'] = page
             self.build_connect(interface_name, biz_content)
 
-            if sign is True:
-                sign_str, params1 = mk_sign(self.params, self.Secret_Key)
-                sign = False
+            sign_str, params1 = mk_sign(self.params, self.Secret_Key)
 
             data = post_request(params1)
 
@@ -167,7 +165,12 @@ class eccang():
                 print("Error: ", data.text)
                 break
             elif data.get('code') == "saas.api.error.code.0049":
-                sign = False
+                print('加密过期')
+                print("加密串: ", sign_str)
+                print("参数列表: ", params1)
+                print("respose_data: ", data)
+                print("request_body: ", data.request.body)
+                print("Error: ", data.text)
                 continue
             else:
 
