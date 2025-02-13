@@ -245,6 +245,7 @@ def getFbaInventory(path='setting.json'):
     EC = eccang(path)
     ProductInventory = EC.get_data(interface_name='getFbaInventory',
                                    biz_content={'page':1,'page_size':100} ,
+                                   to_json=['product_sku_list'],
                                    data_format='dataframe')
     return (ProductInventory)
 
