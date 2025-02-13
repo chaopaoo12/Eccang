@@ -35,6 +35,12 @@ def md5_sign(params, sign_str):
     return (params)
 
 
+def mk_sign(params, Secret_Key):
+    sign_str = mk_str(params, Secret_Key)
+    params = md5_sign(params, sign_str)
+    return (sign_str, params)
+
+
 def post_request(params):
 
     post_url = 'http://openapi-web.eccang.com/openApi/api/unity'
@@ -77,7 +83,7 @@ class eccang():
         }
 
 
-    def get_data(self, interface_name, biz_content, to_json=None, data_format='json', silence=True):
+    def get_data(self, interface_name, biz_content, to_json=None, data_format='json', silence=True, sign = True):
 
         biz_content = {k:v for k,v in biz_content.items() if len(str(v)) > 0 and v is not None}
 
@@ -98,9 +104,10 @@ class eccang():
             biz_content['page'] = page
             self.build_connect(interface_name, biz_content)
 
-            sign_str = mk_str(self.params, self.Secret_Key)
+            if sign is True:
+                sign_str, params1 = mk_sign(self.params, self.Secret_Key)
+                sign = False
 
-            params1 = md5_sign(self.params, sign_str)
             data = post_request(params1)
 
             if silence == False and page == 1:
@@ -159,6 +166,9 @@ class eccang():
                 print("request_body: ", data.request.body)
                 print("Error: ", data.text)
                 break
+            elif data.get('code') == "saas.api.error.code.0049":
+                sign = False
+                continue
             else:
 
                 res = json.loads(data['biz_content'])
