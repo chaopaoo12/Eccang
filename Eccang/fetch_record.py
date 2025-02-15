@@ -206,6 +206,17 @@ def getRmaRefundList(path='setting.json', end_datetime=None, create_datetime=Non
     return (ReturnList)
 
 
+def getFBARefundList(path='setting.json', end_datetime=None, create_datetime=None):
+    # 退货列表
+    EC = eccang(path)
+    ReturnList = EC.get_data(interface_name='AmazonFbaFulfillmentCustomerReturnsData', 
+                             biz_content={'page':1,'page_size':100,
+                                          'return_date_local_start':create_datetime,
+                                          'return_date_local_end':end_datetime},
+                             data_format='dataframe')
+    return (ReturnList)
+
+
 def getShipBatch(path='setting.json', user_id=None, end_date=None, create_date=None, update_date=None):
     # 头程数据
     #todo: userid传入
@@ -270,6 +281,7 @@ def getInventoryBatch(path='setting.json', end_date=None, create_date=None, upda
                                     biz_content={'page':1,'page_size':1000},
                                     data_format='dataframe')
     return (InventoryBatch)
+
 
 def getCurrencyList(path='setting.json', end_datetime=None, create_datetime=None):
     # 货币汇率
